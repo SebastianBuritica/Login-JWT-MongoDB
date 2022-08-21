@@ -24,11 +24,14 @@ mongoose.connect(uri, options)
 
 // import routes
 const authRoutes = require('./routes/auth');
+const validateToken = require('./routes/validate-token');
+const admin = require('./routes/admin');
 
 // route middlewares, we will have to routes in auth, one for register and one for login
 // A middleware is a function that has access to the request and the response object.
 // In between '/api/user', & authRoutes, we will use our middleware (yet to be configured)
 app.use('/api/user', authRoutes);
+app.use('/api/admin', validateToken, admin);
 
 // This middleware is just to test that our server loaded correctly, it will be commented out
 // app.get('/', (req, res) => {
